@@ -55,7 +55,7 @@ class UsersRelationManager extends RelationManager
                 CreateAction::make(),
                 AttachAction::make()
                     ->preloadRecordSelect()
-                    ->form(fn (AttachAction $action): array => [
+                    ->schema(fn (AttachAction $action): array => [
                         $action->getRecordSelect(),
                         Select::make('role')
                             ->label(__('User role'))
