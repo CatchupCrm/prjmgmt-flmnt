@@ -4,21 +4,54 @@
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": "^8.0.2",
+        "ext-iconv": "*",
+        "devaslanphp/filament-avatar": "*",
+        "doctrine/dbal": "^3.0",
+        "dutchcodingcompany/filament-socialite": "*",
+        "filament/filament": "*",
+        "filament/spatie-laravel-media-library-plugin": "*",
+        "filament/spatie-laravel-settings-plugin": "*",
+        "guava/filament-icon-picker": "*",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^9.19",
-        "laravel/sanctum": "^3.0",
-        "laravel/tinker": "^2.7"
+        "jeffgreco13/filament-breezy": "*",
+        "laravel/framework": "*",
+        "laravel/sanctum": "*",
+        "league/oauth2-client": "*",
+        "maatwebsite/excel": "*",
+        "owenvoke/blade-fontawesome": "*",
+        "protonemedia/laravel-verify-new-email": "*",
+        "psr/simple-cache": "*",
+        "pusher/pusher-php-server": "*",
+        "spatie/laravel-permission": "*",
+        "stichoza/google-translate-php": "*"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.9.1",
-        "laravel/pint": "^1.0",
-        "laravel/sail": "^1.0.1",
-        "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^6.1",
-        "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.0"
+        "driftingly/rector-laravel": "*",
+        "fakerphp/faker": "*",
+        "filament/upgrade": "^3.2",
+        "kkomelin/laravel-translatable-string-exporter": "*",
+        "larastan/larastan": "*",
+        "laravel/pint": "*",
+        "laravel/sail": "*",
+        "laravel/tinker": "*",
+        "laravel/ui": "*",
+        "mockery/mockery": "*",
+        "nunomaduro/collision": "*",
+        "phpunit/phpunit": "^12.0",
+        "rector/rector": "*",
+        "spatie/laravel-ignition": "*"
     },
     "autoload": {
         "psr-4": {
@@ -33,12 +66,33 @@
         }
     },
     "scripts": {
+        "install-project-win": [
+            "npm install",
+            "composer install",
+            "npm run build",
+            "composer dump-autoload",
+            "copy .env.example .env",
+            "@php artisan key:generate",
+            "@php artisan migrate",
+            "@php artisan db:seed"
+        ],
+        "install-project": [
+            "npm install",
+            "composer install",
+            "npm run build",
+            "composer dump-autoload",
+            "cp .env.example .env",
+            "@php artisan key:generate",
+            "@php artisan migrate",
+            "@php artisan db:seed"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan filament:upgrade"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -51,15 +105,5 @@
         "laravel": {
             "dont-discover": []
         }
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": true
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
