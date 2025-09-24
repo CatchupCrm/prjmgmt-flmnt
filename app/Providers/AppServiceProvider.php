@@ -7,7 +7,6 @@ use Filament\Facades\Filament;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Vite;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,20 +29,11 @@ class AppServiceProvider extends ServiceProvider
         // Configure application
         $this->configureApp();
 
-        Filament::serving(function () {
+        Filament::serving(static function () {
             // Register custom Filament theme (CSS) - includes tippy.js via @import in filament.scss
             Filament::registerTheme(
                 app(Vite::class)('resources/css/filament.scss'),
             );
-
-            // Register custom JS (if needed)
-            Filament::serving(function () {
-                FilamentAsset::register([
-                    FilamentAsset::SCRIPT => [
-                        app(Vite::class)('resources/js/filament.js'),
-                    ],
-                ]);
-            });
 
             // Add custom meta (favicon)
             //Filament::pushMeta(new HtmlString('<link rel="icon" type="image/x-icon" href="' . config('app.logo') . '">'));
@@ -56,11 +46,6 @@ class AppServiceProvider extends ServiceProvider
                 __('Settings'),
             ]);
         });
-
-        // Force HTTPS over HTTP
-        if (env('APP_FORCE_HTTPS') ?? false) {
-            URL::forceScheme('https');
-        }
     }
 
     private function configureApp(): void
