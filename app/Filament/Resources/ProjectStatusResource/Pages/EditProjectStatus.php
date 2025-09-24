@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\ProjectStatusResource\Pages;
 
+use Filament\Actions\ViewAction;
+use Filament\Actions\DeleteAction;
 use App\Filament\Resources\ProjectStatusResource;
 use App\Models\ProjectStatus;
 use Filament\Pages\Actions;
@@ -14,8 +16,8 @@ class EditProjectStatus extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make(),
-            Actions\DeleteAction::make(),
+            ViewAction::make(),
+            DeleteAction::make(),
         ];
     }
 

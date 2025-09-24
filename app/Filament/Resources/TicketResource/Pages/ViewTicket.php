@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\TicketResource\Pages;
 
+use Filament\Actions\Action;
+use Filament\Actions\EditAction;
+use Filament\Actions\ActionGroup;
 use App\Exports\TicketHoursExport;
 use App\Filament\Resources\TicketResource;
 use App\Models\Activity;
@@ -14,7 +17,6 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
@@ -31,7 +33,7 @@ class ViewTicket extends ViewRecord implements HasForms
 
     protected static string $resource = TicketResource::class;
 
-    protected static string $view = 'filament.resources.tickets.view';
+    protected string $view = 'filament.resources.tickets.view';
 
     protected $listeners = ['doDeleteComment'];
 
@@ -121,7 +123,7 @@ class ViewTicket extends ViewRecord implements HasForms
     protected function getHeaderActions(): array
     {
         return [
-            Actions\Action::make('toggleSubscribe')
+            Action::make('toggleSubscribe')
                 ->label(
                     fn () => $this->record->subscribers()->where('users.id', auth()->user()->id)->count()
                         ? __('Unsubscribe')
@@ -151,7 +153,7 @@ class ViewTicket extends ViewRecord implements HasForms
                     }
                     $this->record->refresh();
                 }),
-            Actions\Action::make('share')
+            Action::make('share')
                 ->label(__('Share'))
                 ->color('gray')
                 ->button()
@@ -159,8 +161,8 @@ class ViewTicket extends ViewRecord implements HasForms
                 ->action(fn () => $this->dispatchBrowserEvent('shareTicket', [
                     'url' => route('filament.resources.tickets.share', $this->record->code),
                 ])),
-            Actions\EditAction::make(),
-            Actions\Action::make('logHours')
+            EditAction::make(),
+            Action::make('logHours')
                 ->label(__('Log time'))
                 ->icon('heroicon-o-clock')
                 ->color('warning')
@@ -172,7 +174,7 @@ class ViewTicket extends ViewRecord implements HasForms
                     auth()->user()->id,
                     [$this->record->owner_id, $this->record->responsible_id]
                 ))
-                ->form([
+                ->schema([
                     TextInput::make('time')
                         ->label(__('Time to log'))
                         ->numeric()
@@ -201,8 +203,8 @@ class ViewTicket extends ViewRecord implements HasForms
                     $this->record->refresh();
                     $this->notify('success', __('Time logged into ticket'));
                 }),
-            Actions\ActionGroup::make([
-                Actions\Action::make('exportLogHours')
+            ActionGroup::make([
+                Action::make('exportLogHours')
                     ->label(__('Export time logged'))
                     ->icon('heroicon-o-document-arrow-down')
                     ->color('warning')

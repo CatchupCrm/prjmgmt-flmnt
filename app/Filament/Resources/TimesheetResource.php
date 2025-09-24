@@ -2,6 +2,14 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Section;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Actions\ViewAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteBulkAction;
+use App\Filament\Resources\TimesheetResource\Pages\ListTimesheet;
+use App\Filament\Resources\TimesheetResource\Pages\EditTimesheet;
 use App\Filament\Resources\TimesheetResource\Pages;
 use App\Models\Activity;
 use App\Models\TicketHour;
@@ -9,7 +17,6 @@ use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -18,7 +25,7 @@ class TimesheetResource extends Resource
 {
     protected static ?string $model = TicketHour::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-check-badge';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-check-badge';
 
     protected static ?int $navigationSort = 4;
 
@@ -42,11 +49,11 @@ class TimesheetResource extends Resource
         return auth()->user()->can('List timesheet data');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\Card::make()
+        return $schema
+            ->components([
+                Section::make()
                     ->schema([
                         Select::make('activity_id')
                             ->label(__('Activity'))
@@ -71,31 +78,31 @@ class TimesheetResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')
+                TextColumn::make('user.name')
                     ->label(__('Owner'))
                     ->sortable()
                     ->formatStateUsing(fn ($record) => view('components.user-avatar', ['user' => $record->user]))
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('value')
+                TextColumn::make('value')
                     ->label(__('Hours'))
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('comment')
+                TextColumn::make('comment')
                     ->label(__('Comment'))
                     ->limit(50)
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('activity.name')
+                TextColumn::make('activity.name')
                     ->label(__('Activity'))
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('ticket.name')
+                TextColumn::make('ticket.name')
                     ->label(__('Ticket'))
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(__('Created at'))
                     ->dateTime()
                     ->sortable()
@@ -103,12 +110,12 @@ class TimesheetResource extends Resource
             ])
             ->filters([
             ])
-            ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                ViewAction::make(),
+                EditAction::make(),
             ])
             ->groupedBulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                DeleteBulkAction::make(),
             ]);
     }
 
@@ -121,8 +128,8 @@ class TimesheetResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTimesheet::route('/'),
-            'edit'  => Pages\EditTimesheet::route('/{record}/edit'),
+            'index' => ListTimesheet::route('/'),
+            'edit'  => EditTimesheet::route('/{record}/edit'),
         ];
     }
 }

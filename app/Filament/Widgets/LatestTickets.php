@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use Filament\Tables\Columns\TextColumn;
 use App\Models\Ticket;
 use Filament\Tables;
 use Filament\Widgets\TableWidget as BaseWidget;
@@ -53,7 +54,7 @@ class LatestTickets extends BaseWidget
     protected function getTableColumns(): array
     {
         return [
-            Tables\Columns\TextColumn::make('name')
+            TextColumn::make('name')
                 ->label(__('Ticket'))
                 ->formatStateUsing(fn ($record) => new HtmlString('
                     <div class="flex flex-col gap-1">
@@ -78,7 +79,7 @@ class LatestTickets extends BaseWidget
                     </div>
                 ')),
 
-            Tables\Columns\TextColumn::make('status.name')
+            TextColumn::make('status.name')
                 ->label(__('Status'))
                 ->formatStateUsing(fn ($record) => new HtmlString('
                             <div class="flex items-center gap-2 mt-1">
@@ -88,11 +89,11 @@ class LatestTickets extends BaseWidget
                             </div>
                         ')),
 
-            Tables\Columns\TextColumn::make('type.name')
+            TextColumn::make('type.name')
                 ->label(__('Type'))
                 ->formatStateUsing(fn ($record) => view('components.ticket-type', ['type' => $record->type])),
 
-            Tables\Columns\TextColumn::make('priority.name')
+            TextColumn::make('priority.name')
                 ->label(__('Priority'))
                 ->formatStateUsing(fn ($record) => new HtmlString('
                             <div class="flex items-center gap-2 mt-1">

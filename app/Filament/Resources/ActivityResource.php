@@ -2,10 +2,22 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Grid;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\RichEditor;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Actions\ViewAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteBulkAction;
+use App\Filament\Resources\ActivityResource\Pages\ListActivities;
+use App\Filament\Resources\ActivityResource\Pages\CreateActivity;
+use App\Filament\Resources\ActivityResource\Pages\ViewActivity;
+use App\Filament\Resources\ActivityResource\Pages\EditActivity;
 use App\Filament\Resources\ActivityResource\Pages;
 use App\Models\Activity;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -14,7 +26,7 @@ class ActivityResource extends Resource
 {
     protected static ?string $model = Activity::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-clipboard';
 
     protected static ?int $navigationSort = 1;
 
@@ -33,20 +45,20 @@ class ActivityResource extends Resource
         return __('Referential');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\Card::make()
+        return $schema
+            ->components([
+                Section::make()
                     ->schema([
-                        Forms\Components\Grid::make()
+                        Grid::make()
                             ->schema([
-                                Forms\Components\TextInput::make('name')
+                                TextInput::make('name')
                                     ->label(__('Activity name'))
                                     ->required()
                                     ->maxLength(255),
 
-                                Forms\Components\RichEditor::make('description')
+                                RichEditor::make('description')
                                     ->label(__('Description'))
                                     ->required()
                                     ->columnSpan(2),
@@ -59,12 +71,12 @@ class ActivityResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label(__('Activity name'))
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(__('Created at'))
                     ->dateTime()
                     ->sortable()
@@ -72,12 +84,12 @@ class ActivityResource extends Resource
             ])
             ->filters([
             ])
-            ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                ViewAction::make(),
+                EditAction::make(),
             ])
             ->groupedBulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                DeleteBulkAction::make(),
             ])
             ->defaultSort('id');
     }
@@ -91,10 +103,10 @@ class ActivityResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListActivities::route('/'),
-            'create' => Pages\CreateActivity::route('/create'),
-            'view'   => Pages\ViewActivity::route('/{record}'),
-            'edit'   => Pages\EditActivity::route('/{record}/edit'),
+            'index'  => ListActivities::route('/'),
+            'create' => CreateActivity::route('/create'),
+            'view'   => ViewActivity::route('/{record}'),
+            'edit'   => EditActivity::route('/{record}/edit'),
         ];
     }
 }

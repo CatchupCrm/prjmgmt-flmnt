@@ -2,10 +2,23 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Grid;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\CheckboxList;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\TagsColumn;
+use Filament\Actions\ViewAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteBulkAction;
+use App\Filament\Resources\UserResource\Pages\ListUsers;
+use App\Filament\Resources\UserResource\Pages\CreateUser;
+use App\Filament\Resources\UserResource\Pages\ViewUser;
+use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -14,7 +27,7 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-users';
 
     protected static ?int $navigationSort = 1;
 
@@ -33,20 +46,20 @@ class UserResource extends Resource
         return __('Permissions');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\Card::make()
+        return $schema
+            ->components([
+                Section::make()
                     ->schema([
-                        Forms\Components\Grid::make()
+                        Grid::make()
                             ->schema([
-                                Forms\Components\TextInput::make('name')
+                                TextInput::make('name')
                                     ->label(__('Full name'))
                                     ->required()
                                     ->maxLength(255),
 
-                                Forms\Components\TextInput::make('email')
+                                TextInput::make('email')
                                     ->label(__('Email address'))
                                     ->email()
                                     ->required()
@@ -57,7 +70,7 @@ class UserResource extends Resource
                                     )
                                     ->maxLength(255),
 
-                                Forms\Components\CheckboxList::make('roles')
+                                CheckboxList::make('roles')
                                     ->label(__('Permission roles'))
                                     ->required()
                                     ->columns(3)
@@ -71,31 +84,31 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label(__('Full name'))
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('email')
+                TextColumn::make('email')
                     ->label(__('Email address'))
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TagsColumn::make('roles.name')
+                TagsColumn::make('roles.name')
                     ->label(__('Roles'))
                     ->limit(2),
 
-                Tables\Columns\TextColumn::make('email_verified_at')
+                TextColumn::make('email_verified_at')
                     ->label(__('Email verified at'))
                     ->dateTime()
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('socials')
+                TextColumn::make('socials')
                     ->label(__('Linked social networks'))
                     ->view('partials.filament.resources.social-icon'),
 
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(__('Created at'))
                     ->dateTime()
                     ->sortable()
@@ -103,12 +116,12 @@ class UserResource extends Resource
             ])
             ->filters([
             ])
-            ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                ViewAction::make(),
+                EditAction::make(),
             ])
             ->groupedBulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                DeleteBulkAction::make(),
             ]);
     }
 
@@ -121,10 +134,10 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'view'   => Pages\ViewUser::route('/{record}'),
-            'edit'   => Pages\EditUser::route('/{record}/edit'),
+            'index'  => ListUsers::route('/'),
+            'create' => CreateUser::route('/create'),
+            'view'   => ViewUser::route('/{record}'),
+            'edit'   => EditUser::route('/{record}/edit'),
         ];
     }
 }

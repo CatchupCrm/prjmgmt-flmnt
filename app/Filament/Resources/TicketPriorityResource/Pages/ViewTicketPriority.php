@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\TicketPriorityResource\Pages;
 
+use Filament\Actions\EditAction;
 use App\Filament\Resources\TicketPriorityResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
@@ -13,7 +14,7 @@ class ViewTicketPriority extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make(),
+            EditAction::make(),
         ];
     }
 }

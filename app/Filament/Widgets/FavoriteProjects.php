@@ -2,8 +2,8 @@
 
 namespace App\Filament\Widgets;
 
+use Filament\Widgets\StatsOverviewWidget\Stat;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
-use Filament\Widgets\StatsOverviewWidget\Card;
 use Illuminate\Support\HtmlString;
 
 class FavoriteProjects extends BaseWidget
@@ -33,7 +33,7 @@ class FavoriteProjects extends BaseWidget
         foreach ($favoriteProjects as $project) {
             $ticketsCount      = $project->tickets()->count();
             $contributorsCount = $project->contributors->count();
-            $cards[]           = Card::make('', new HtmlString('
+            $cards[]           = Stat::make('', new HtmlString('
                     <div class="flex items-center gap-2 -mt-2 text-lg">
                         <div style=\'background-image: url("' . $project->cover . '")\'
                              class="w-8 h-8 bg-cover bg-center bg-no-repeat"></div>

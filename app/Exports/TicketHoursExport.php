@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use Illuminate\Support\Collection;
 use App\Models\Ticket;
 use App\Models\TicketHour;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -31,7 +32,7 @@ class TicketHoursExport implements FromCollection, WithHeadings
     }
 
     /**
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function collection()
     {

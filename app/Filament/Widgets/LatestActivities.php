@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use Filament\Tables\Columns\TextColumn;
 use App\Models\TicketActivity;
 use Filament\Tables;
 use Filament\Widgets\TableWidget as BaseWidget;
@@ -53,7 +54,7 @@ class LatestActivities extends BaseWidget
     protected function getTableColumns(): array
     {
         return [
-            Tables\Columns\TextColumn::make('ticket')
+            TextColumn::make('ticket')
                 ->label(__('Ticket'))
                 ->formatStateUsing(function ($record, $state) {
                     return new HtmlString('
@@ -82,11 +83,11 @@ class LatestActivities extends BaseWidget
                 ');
                 }),
 
-            Tables\Columns\TextColumn::make('user.name')
+            TextColumn::make('user.name')
                 ->label(__('Changed by'))
                 ->formatStateUsing(fn ($record) => view('components.user-avatar', ['user' => $record->user])),
 
-            Tables\Columns\TextColumn::make('created_at')
+            TextColumn::make('created_at')
                 ->label(__('Performed at'))
                 ->dateTime(),
         ];

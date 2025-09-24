@@ -2,6 +2,29 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Grid;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\RichEditor;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\TagsColumn;
+use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Actions\Action;
+use Filament\Actions\ViewAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use App\Filament\Resources\ProjectResource\RelationManagers\SprintsRelationManager;
+use App\Filament\Resources\ProjectResource\RelationManagers\UsersRelationManager;
+use App\Filament\Resources\ProjectResource\RelationManagers\StatusesRelationManager;
+use App\Filament\Resources\ProjectResource\Pages\ListProjects;
+use App\Filament\Resources\ProjectResource\Pages\CreateProject;
+use App\Filament\Resources\ProjectResource\Pages\ViewProject;
+use App\Filament\Resources\ProjectResource\Pages\EditProject;
 use App\Exports\ProjectHoursExport;
 use App\Filament\Resources\ProjectResource\Pages;
 use App\Filament\Resources\ProjectResource\RelationManagers;
@@ -11,7 +34,6 @@ use App\Models\ProjectStatus;
 use App\Models\User;
 use Filament\Facades\Filament;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -23,7 +45,7 @@ class ProjectResource extends Resource
 {
     protected static ?string $model = Project::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-archive-box';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-archive-box';
 
     protected static ?int $navigationSort = 1;
 
@@ -42,16 +64,16 @@ class ProjectResource extends Resource
         return __('Management');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\Card::make()
+        return $schema
+            ->components([
+                Section::make()
                     ->schema([
-                        Forms\Components\Grid::make()
+                        Grid::make()
                             ->columns(3)
                             ->schema([
-                                Forms\Components\SpatieMediaLibraryFileUpload::make('cover')
+                                SpatieMediaLibraryFileUpload::make('cover')
                                     ->label(__('Cover image'))
                                     ->image()
                                     ->helperText(
@@ -59,20 +81,20 @@ class ProjectResource extends Resource
                                     )
                                     ->columnSpan(1),
 
-                                Forms\Components\Grid::make()
+                                Grid::make()
                                     ->columnSpan(2)
                                     ->schema([
-                                        Forms\Components\Grid::make()
+                                        Grid::make()
                                             ->columnSpan(2)
                                             ->columns(12)
                                             ->schema([
-                                                Forms\Components\TextInput::make('name')
+                                                TextInput::make('name')
                                                     ->label(__('Project name'))
                                                     ->required()
                                                     ->columnSpan(10)
                                                     ->maxLength(255),
 
-                                                Forms\Components\TextInput::make('ticket_prefix')
+                                                TextInput::make('ticket_prefix')
                                                     ->label(__('Ticket prefix'))
                                                     ->maxLength(3)
                                                     ->columnSpan(2)
@@ -83,14 +105,14 @@ class ProjectResource extends Resource
                                                     ->required(),
                                             ]),
 
-                                        Forms\Components\Select::make('owner_id')
+                                        Select::make('owner_id')
                                             ->label(__('Project owner'))
                                             ->searchable()
                                             ->options(fn () => User::all()->pluck('name', 'id')->toArray())
                                             ->default(fn () => auth()->user()->id)
                                             ->required(),
 
-                                        Forms\Components\Select::make('status_id')
+                                        Select::make('status_id')
                                             ->label(__('Project status'))
                                             ->searchable()
                                             ->options(fn () => ProjectStatus::all()->pluck('name', 'id')->toArray())
@@ -98,11 +120,11 @@ class ProjectResource extends Resource
                                             ->required(),
                                     ]),
 
-                                Forms\Components\RichEditor::make('description')
+                                RichEditor::make('description')
                                     ->label(__('Project description'))
                                     ->columnSpan(3),
 
-                                Forms\Components\Select::make('type')
+                                Select::make('type')
                                     ->label(__('Project type'))
                                     ->searchable()
                                     ->options([
@@ -123,7 +145,7 @@ class ProjectResource extends Resource
                                     })
                                     ->required(),
 
-                                Forms\Components\Select::make('status_type')
+                                Select::make('status_type')
                                     ->label(__('Statuses configuration'))
                                     ->helperText(
                                         __('If custom type selected, you need to configure project specific statuses')
@@ -145,24 +167,24 @@ class ProjectResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('cover')
+                TextColumn::make('cover')
                     ->label(__('Cover image'))
                     ->formatStateUsing(fn ($state) => new HtmlString('
                             <div style=\'background-image: url("' . $state . '")\'
                                  class="w-8 h-8 bg-cover bg-center bg-no-repeat"></div>
                         ')),
 
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label(__('Project name'))
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('owner.name')
+                TextColumn::make('owner.name')
                     ->label(__('Project owner'))
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('status.name')
+                TextColumn::make('status.name')
                     ->label(__('Project status'))
                     ->formatStateUsing(fn ($record) => new HtmlString('
                             <div class="flex items-center gap-2">
@@ -174,11 +196,11 @@ class ProjectResource extends Resource
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TagsColumn::make('users.name')
+                TagsColumn::make('users.name')
                     ->label(__('Affected users'))
                     ->limit(2),
 
-                Tables\Columns\BadgeColumn::make('type')
+                BadgeColumn::make('type')
                     ->enum([
                         'kanban' => __('Kanban'),
                         'scrum'  => __('Scrum'),
@@ -188,25 +210,25 @@ class ProjectResource extends Resource
                         'warning'   => 'scrum',
                     ]),
 
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(__('Created at'))
                     ->dateTime()
                     ->sortable()
                     ->searchable(),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('owner_id')
+                SelectFilter::make('owner_id')
                     ->label(__('Owner'))
                     ->multiple()
                     ->options(fn () => User::all()->pluck('name', 'id')->toArray()),
 
-                Tables\Filters\SelectFilter::make('status_id')
+                SelectFilter::make('status_id')
                     ->label(__('Status'))
                     ->multiple()
                     ->options(fn () => ProjectStatus::all()->pluck('name', 'id')->toArray()),
             ])
-            ->actions([
-                Tables\Actions\Action::make('favorite')
+            ->recordActions([
+                Action::make('favorite')
                     ->label('')
                     ->icon('heroicon-o-star')
                     ->color(fn ($record) => auth()->user()->favoriteProjects()
@@ -227,11 +249,11 @@ class ProjectResource extends Resource
                         Filament::notify('success', __('Project updated'));
                     }),
 
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                ViewAction::make(),
+                EditAction::make(),
 
-                Tables\Actions\ActionGroup::make([
-                    Tables\Actions\Action::make('exportLogHours')
+                ActionGroup::make([
+                    Action::make('exportLogHours')
                         ->label(__('Export hours'))
                         ->icon('heroicon-o-document-arrow-down')
                         ->color('gray')
@@ -242,7 +264,7 @@ class ProjectResource extends Resource
                             ['Content-Type' => 'text/csv']
                         )),
 
-                    Tables\Actions\Action::make('kanban')
+                    Action::make('kanban')
                         ->label(
                             fn ($record) => ($record->type === 'scrum' ? __('Scrum board') : __('Kanban board'))
                         )
@@ -258,26 +280,26 @@ class ProjectResource extends Resource
                 ])->color('gray'),
             ])
             ->groupedBulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                DeleteBulkAction::make(),
             ]);
     }
 
     public static function getRelations(): array
     {
         return [
-            RelationManagers\SprintsRelationManager::class,
-            RelationManagers\UsersRelationManager::class,
-            RelationManagers\StatusesRelationManager::class,
+            SprintsRelationManager::class,
+            UsersRelationManager::class,
+            StatusesRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListProjects::route('/'),
-            'create' => Pages\CreateProject::route('/create'),
-            'view'   => Pages\ViewProject::route('/{record}'),
-            'edit'   => Pages\EditProject::route('/{record}/edit'),
+            'index'  => ListProjects::route('/'),
+            'create' => CreateProject::route('/create'),
+            'view'   => ViewProject::route('/{record}'),
+            'edit'   => EditProject::route('/{record}/edit'),
         ];
     }
 }

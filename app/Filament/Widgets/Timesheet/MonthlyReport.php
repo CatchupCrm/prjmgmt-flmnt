@@ -15,7 +15,7 @@ class MonthlyReport extends BarChartWidget
 {
     public ?string $filter = '2024';
 
-    protected static ?array $options = [
+    protected ?array $options = [
         'plugins' => [
             'legend' => [
                 'display' => true,

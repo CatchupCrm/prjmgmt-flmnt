@@ -2,9 +2,19 @@
 
 namespace App\Filament\Resources\ProjectResource\RelationManagers;
 
+use Filament\Schemas\Schema;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\Checkbox;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ColorColumn;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Actions\CreateAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
 use App\Models\TicketStatus;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -21,26 +31,26 @@ class StatusesRelationManager extends RelationManager
         return $ownerRecord->status_type === 'custom';
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
+        return $schema
+            ->components([
+                TextInput::make('name')
                     ->label(__('Status name'))
                     ->required()
                     ->maxLength(255),
 
-                Forms\Components\ColorPicker::make('color')
+                ColorPicker::make('color')
                     ->label(__('Status color'))
                     ->required(),
 
-                Forms\Components\Checkbox::make('is_default')
+                Checkbox::make('is_default')
                     ->label(__('Default status'))
                     ->helperText(
                         __('If checked, this status will be automatically affected to new projects')
                     ),
 
-                Forms\Components\TextInput::make('order')
+                TextInput::make('order')
                     ->label(__('Status order'))
                     ->integer()
                     ->default(
@@ -54,27 +64,27 @@ class StatusesRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('order')
+                TextColumn::make('order')
                     ->label(__('Status order'))
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\ColorColumn::make('color')
+                ColorColumn::make('color')
                     ->label(__('Status color'))
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label(__('Status name'))
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\IconColumn::make('is_default')
+                IconColumn::make('is_default')
                     ->label(__('Default status'))
                     ->boolean()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(__('Created at'))
                     ->dateTime()
                     ->sortable()
@@ -83,14 +93,14 @@ class StatusesRelationManager extends RelationManager
             ->filters([
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                CreateAction::make(),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                EditAction::make(),
+                DeleteAction::make(),
             ])
             ->groupedBulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                DeleteBulkAction::make(),
             ])
             ->defaultSort('order');
     }

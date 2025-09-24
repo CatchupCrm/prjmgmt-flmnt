@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use Illuminate\Contracts\View\View;
 use App\Models\User;
 use Closure;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -24,7 +25,7 @@ class UserAvatar extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|Closure|string
+     * @return View|Closure|string
      */
     public function render()
     {

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\TicketTypeResource\Pages;
 
+use Filament\Actions\EditAction;
 use App\Filament\Resources\TicketTypeResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
@@ -13,7 +14,7 @@ class ViewTicketType extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make(),
+            EditAction::make(),
         ];
     }
 }

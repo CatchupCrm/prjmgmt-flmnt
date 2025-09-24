@@ -2,6 +2,8 @@
 
 namespace App\Filament\Widgets;
 
+use Filament\Tables\Columns\TextColumn;
+use Filament\Actions\Action;
 use App\Models\TicketComment;
 use Filament\Forms\Components\RichEditor;
 use Filament\Tables;
@@ -54,7 +56,7 @@ class LatestComments extends BaseWidget
     protected function getTableColumns(): array
     {
         return [
-            Tables\Columns\TextColumn::make('ticket')
+            TextColumn::make('ticket')
                 ->label(__('Ticket'))
                 ->formatStateUsing(function ($state) {
                     return new HtmlString('
@@ -74,11 +76,11 @@ class LatestComments extends BaseWidget
                 ');
                 }),
 
-            Tables\Columns\TextColumn::make('user.name')
+            TextColumn::make('user.name')
                 ->label(__('Owner'))
                 ->formatStateUsing(fn ($record) => view('components.user-avatar', ['user' => $record->user])),
 
-            Tables\Columns\TextColumn::make('created_at')
+            TextColumn::make('created_at')
                 ->label(__('Commented at'))
                 ->dateTime(),
         ];
@@ -87,13 +89,13 @@ class LatestComments extends BaseWidget
     protected function getTableActions(): array
     {
         return [
-            Tables\Actions\Action::make('view')
+            Action::make('view')
                 ->label(__('View'))
                 ->icon('heroicon-s-eye')
                 ->color('gray')
                 ->modalHeading(__('Comment details'))
                 ->modalButton(__('View ticket'))
-                ->form([
+                ->schema([
                     RichEditor::make('content')
                         ->label(__('Content'))
                         ->default(fn ($record) => $record->content)

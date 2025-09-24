@@ -21,9 +21,9 @@ class RoadMap extends Page implements HasForms
 
     public bool $ticket = false;
 
-    protected static ?string $navigationIcon = 'heroicon-o-calendar';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-calendar';
 
-    protected static string $view = 'filament.pages.road-map';
+    protected string $view = 'filament.pages.road-map';
 
     protected static ?string $slug = 'road-map';
 

@@ -2,10 +2,25 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Grid;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\Checkbox;
+use Filament\Tables\Columns\ColorColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Actions\ViewAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteBulkAction;
+use App\Filament\Resources\ProjectStatusResource\Pages\ListProjectStatuses;
+use App\Filament\Resources\ProjectStatusResource\Pages\CreateProjectStatus;
+use App\Filament\Resources\ProjectStatusResource\Pages\ViewProjectStatus;
+use App\Filament\Resources\ProjectStatusResource\Pages\EditProjectStatus;
 use App\Filament\Resources\ProjectStatusResource\Pages;
 use App\Models\ProjectStatus;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -14,7 +29,7 @@ class ProjectStatusResource extends Resource
 {
     protected static ?string $model = ProjectStatus::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-clipboard-document-list';
 
     protected static ?int $navigationSort = 1;
 
@@ -33,24 +48,24 @@ class ProjectStatusResource extends Resource
         return __('Referential');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\Card::make()
+        return $schema
+            ->components([
+                Section::make()
                     ->schema([
-                        Forms\Components\Grid::make()
+                        Grid::make()
                             ->schema([
-                                Forms\Components\TextInput::make('name')
+                                TextInput::make('name')
                                     ->label(__('Status name'))
                                     ->required()
                                     ->maxLength(255),
 
-                                Forms\Components\ColorPicker::make('color')
+                                ColorPicker::make('color')
                                     ->label(__('Status color'))
                                     ->required(),
 
-                                Forms\Components\Checkbox::make('is_default')
+                                Checkbox::make('is_default')
                                     ->label(__('Default status'))
                                     ->helperText(
                                         __('If checked, this status will be automatically affected to new projects')
@@ -64,22 +79,22 @@ class ProjectStatusResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ColorColumn::make('color')
+                ColorColumn::make('color')
                     ->label(__('Status color'))
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label(__('Status name'))
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\IconColumn::make('is_default')
+                IconColumn::make('is_default')
                     ->label(__('Default status'))
                     ->boolean()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(__('Created at'))
                     ->dateTime()
                     ->sortable()
@@ -87,12 +102,12 @@ class ProjectStatusResource extends Resource
             ])
             ->filters([
             ])
-            ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                ViewAction::make(),
+                EditAction::make(),
             ])
             ->groupedBulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                DeleteBulkAction::make(),
             ]);
     }
 
@@ -105,10 +120,10 @@ class ProjectStatusResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListProjectStatuses::route('/'),
-            'create' => Pages\CreateProjectStatus::route('/create'),
-            'view'   => Pages\ViewProjectStatus::route('/{record}'),
-            'edit'   => Pages\EditProjectStatus::route('/{record}/edit'),
+            'index'  => ListProjectStatuses::route('/'),
+            'create' => CreateProjectStatus::route('/create'),
+            'view'   => ViewProjectStatus::route('/{record}'),
+            'edit'   => EditProjectStatus::route('/{record}/edit'),
         ];
     }
 }

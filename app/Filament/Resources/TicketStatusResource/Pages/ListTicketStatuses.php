@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\TicketStatusResource\Pages;
 
+use Filament\Actions\CreateAction;
 use App\Filament\Resources\TicketStatusResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
@@ -14,7 +15,7 @@ class ListTicketStatuses extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 

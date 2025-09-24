@@ -2,12 +2,12 @@
 
 namespace App\Filament\Pages;
 
+use Filament\Actions\Action;
 use App\Helpers\KanbanScrumHelper;
 use App\Models\Project;
 use Filament\Facades\Filament;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Pages\Actions\Action;
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
 
@@ -16,11 +16,11 @@ class Scrum extends Page implements HasForms
     use InteractsWithForms;
     use KanbanScrumHelper;
 
-    protected static ?string $navigationIcon = 'heroicon-o-view-columns';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-view-columns';
 
     protected static ?string $slug = 'scrum/{project}';
 
-    protected static string $view = 'filament.pages.scrum';
+    protected string $view = 'filament.pages.scrum';
 
     protected static bool $shouldRegisterNavigation = false;
 

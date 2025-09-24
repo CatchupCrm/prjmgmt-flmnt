@@ -2,15 +2,16 @@
 
 namespace App\Filament\Pages;
 
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Wizard;
+use Filament\Schemas\Components\Wizard\Step;
+use Filament\Schemas\Components\Grid;
 use App\Helpers\JiraHelper;
 use App\Jobs\ImportJiraTicketsJob;
-use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\CheckboxList;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Wizard;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
@@ -37,9 +38,9 @@ class JiraImport extends Page implements HasForms
 
     public $ticketsDataApi;
 
-    protected static ?string $navigationIcon = 'heroicon-o-cloud-arrow-down';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-cloud-arrow-down';
 
-    protected static string $view = 'filament.pages.jira-import';
+    protected string $view = 'filament.pages.jira-import';
 
     protected static ?string $slug = 'jira-import';
 
@@ -122,10 +123,10 @@ class JiraImport extends Page implements HasForms
     protected function getFormSchema(): array
     {
         return [
-            Card::make()
+            Section::make()
                 ->schema([
                     Wizard::make([
-                        Wizard\Step::make(__('Jira login'))
+                        Step::make(__('Jira login'))
                             ->schema([
                                 Placeholder::make('info')
                                     ->extraAttributes([
@@ -158,7 +159,7 @@ class JiraImport extends Page implements HasForms
                                 $this->emit('updateJiraProjects');
                             }),
 
-                        Wizard\Step::make(__('Jira projects'))
+                        Step::make(__('Jira projects'))
                             ->schema([
                                 Placeholder::make('hint')
                                     ->extraAttributes([
@@ -212,7 +213,7 @@ class JiraImport extends Page implements HasForms
                                 $this->emit('updateJiraTickets');
                             }),
 
-                        Wizard\Step::make(__('Jira tickets'))
+                        Step::make(__('Jira tickets'))
                             ->schema(function () {
                                 $fields = [];
 

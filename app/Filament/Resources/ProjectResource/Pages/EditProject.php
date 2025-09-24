@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\ProjectResource\Pages;
 
+use Filament\Actions\Action;
+use Filament\Actions\ViewAction;
+use Filament\Actions\DeleteAction;
 use App\Filament\Resources\ProjectResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
@@ -13,7 +16,7 @@ class EditProject extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\Action::make('kanban')
+            Action::make('kanban')
                 ->label(
                     fn () => ($this->record->type === 'scrum' ? __('Scrum board') : __('Kanban board'))
                 )
@@ -27,8 +30,8 @@ class EditProject extends EditRecord
                     return route('filament.pages.kanban/{project}', ['project' => $this->record->id]);
                 }),
 
-            Actions\ViewAction::make(),
-            Actions\DeleteAction::make(),
+            ViewAction::make(),
+            DeleteAction::make(),
         ];
     }
 }

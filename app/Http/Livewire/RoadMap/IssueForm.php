@@ -2,6 +2,13 @@
 
 namespace App\Http\Livewire\RoadMap;
 
+use Filament\Actions\Contracts\HasActions;
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Schemas\Components\Grid;
+use Filament\Forms\Components\Select;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\RichEditor;
 use App\Models\Project;
 use App\Models\Ticket;
 use App\Models\TicketPriority;
@@ -14,8 +21,9 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Livewire\Component;
 
-class IssueForm extends Component implements HasForms
+class IssueForm extends Component implements HasForms, HasActions
 {
+    use InteractsWithActions;
     use InteractsWithForms;
 
     public ?Project $project = null;
@@ -68,11 +76,11 @@ class IssueForm extends Component implements HasForms
     protected function getFormSchema(): array
     {
         return [
-            Forms\Components\Grid::make()
+            Grid::make()
                 ->schema([
-                    Forms\Components\Grid::make(4)
+                    Grid::make(4)
                         ->schema([
-                            Forms\Components\Select::make('project_id')
+                            Select::make('project_id')
                                 ->label(__('Project'))
                                 ->searchable()
                                 ->reactive()
@@ -84,10 +92,10 @@ class IssueForm extends Component implements HasForms
                                             return $query->where('users.id', auth()->user()->id);
                                         })->pluck('name', 'id')->toArray()
                                 )
-                                ->afterStateUpdated(fn (\Filament\Forms\Get $get) => $this->initProject($get('project_id')))
+                                ->afterStateUpdated(fn (Get $get) => $this->initProject($get('project_id')))
                                 ->required(),
 
-                            Forms\Components\Select::make('sprint_id')
+                            Select::make('sprint_id')
                                 ->label(__('Sprint'))
                                 ->searchable()
                                 ->reactive()
@@ -95,7 +103,7 @@ class IssueForm extends Component implements HasForms
                                 ->columnSpan(2)
                                 ->options(fn () => $this->sprints),
 
-                            Forms\Components\Select::make('epic_id')
+                            Select::make('epic_id')
                                 ->label(__('Epic'))
                                 ->searchable()
                                 ->reactive()
@@ -104,29 +112,29 @@ class IssueForm extends Component implements HasForms
                                 ->visible(fn () => $this->project && $this->project->type !== 'scrum')
                                 ->options(fn () => $this->epics),
 
-                            Forms\Components\TextInput::make('name')
+                            TextInput::make('name')
                                 ->label(__('Ticket name'))
                                 ->required()
                                 ->columnSpan(4)
                                 ->maxLength(255),
                         ]),
 
-                    Forms\Components\Select::make('owner_id')
+                    Select::make('owner_id')
                         ->label(__('Ticket owner'))
                         ->searchable()
                         ->options(fn () => User::all()->pluck('name', 'id')->toArray())
                         ->required(),
 
-                    Forms\Components\Select::make('responsible_id')
+                    Select::make('responsible_id')
                         ->label(__('Ticket responsible'))
                         ->searchable()
                         ->options(fn () => User::all()->pluck('name', 'id')->toArray()),
 
-                    Forms\Components\Grid::make()
+                    Grid::make()
                         ->columns(3)
                         ->columnSpan(2)
                         ->schema([
-                            Forms\Components\Select::make('status_id')
+                            Select::make('status_id')
                                 ->label(__('Ticket status'))
                                 ->searchable()
                                 ->options(function ($get) {
@@ -144,13 +152,13 @@ class IssueForm extends Component implements HasForms
                                 })
                                 ->required(),
 
-                            Forms\Components\Select::make('type_id')
+                            Select::make('type_id')
                                 ->label(__('Ticket type'))
                                 ->searchable()
                                 ->options(fn () => TicketType::all()->pluck('name', 'id')->toArray())
                                 ->required(),
 
-                            Forms\Components\Select::make('priority_id')
+                            Select::make('priority_id')
                                 ->label(__('Ticket priority'))
                                 ->searchable()
                                 ->options(fn () => TicketPriority::all()->pluck('name', 'id')->toArray())
@@ -158,16 +166,16 @@ class IssueForm extends Component implements HasForms
                         ]),
                 ]),
 
-            Forms\Components\RichEditor::make('content')
+            RichEditor::make('content')
                 ->label(__('Ticket content'))
                 ->required()
                 ->columnSpan(2),
 
-            Forms\Components\Grid::make()
+            Grid::make()
                 ->columnSpan(2)
                 ->columns(12)
                 ->schema([
-                    Forms\Components\TextInput::make('estimation')
+                    TextInput::make('estimation')
                         ->label(__('Estimation time'))
                         ->numeric()
                         ->columnSpan(4),

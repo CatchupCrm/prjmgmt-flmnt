@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Filament\Pages;
 
-use Filament\Forms\Components\Card;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Grid;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
@@ -21,7 +21,7 @@ class TimesheetExport extends Page implements HasForms
 
     protected static ?int $navigationSort = 2;
 
-    protected static string $view = 'filament.pages.timesheet-export';
+    protected string $view = 'filament.pages.timesheet-export';
 
     public static function getNavigationGroup(): ?string
     {
@@ -48,7 +48,7 @@ class TimesheetExport extends Page implements HasForms
     protected function getFormSchema(): array
     {
         return [
-            Card::make()->schema([
+            Section::make()->schema([
                 Grid::make()
                     ->columns(2)
                     ->schema([

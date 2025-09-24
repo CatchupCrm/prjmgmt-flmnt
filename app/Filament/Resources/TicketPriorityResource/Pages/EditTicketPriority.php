@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\TicketPriorityResource\Pages;
 
+use Filament\Actions\ViewAction;
+use Filament\Actions\DeleteAction;
 use App\Filament\Resources\TicketPriorityResource;
 use App\Models\TicketPriority;
 use Filament\Pages\Actions;
@@ -14,8 +16,8 @@ class EditTicketPriority extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make(),
-            Actions\DeleteAction::make(),
+            ViewAction::make(),
+            DeleteAction::make(),
         ];
     }
 

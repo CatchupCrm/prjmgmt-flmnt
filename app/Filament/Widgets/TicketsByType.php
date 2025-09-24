@@ -9,9 +9,9 @@ class TicketsByType extends DoughnutChartWidget
 {
     protected static ?int $sort = 2;
 
-    protected static ?string $heading = 'Chart';
+    protected ?string $heading = 'Chart';
 
-    protected static ?string $maxHeight = '300px';
+    protected ?string $maxHeight = '300px';
 
     protected int|string|array $columnSpan = [
         'sm' => 1,

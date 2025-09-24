@@ -2,9 +2,9 @@
 
 namespace App\Filament\Pages;
 
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Grid;
 use App\Models\Project;
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -15,9 +15,9 @@ class Board extends Page implements HasForms
 {
     use InteractsWithForms;
 
-    protected static ?string $navigationIcon = 'heroicon-o-view-columns';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-view-columns';
 
-    protected static string $view = 'filament.pages.board';
+    protected string $view = 'filament.pages.board';
 
     protected static ?string $slug = 'board';
 
@@ -57,7 +57,7 @@ class Board extends Page implements HasForms
     protected function getFormSchema(): array
     {
         return [
-            Card::make()
+            Section::make()
                 ->schema([
                     Grid::make()
                         ->columns(1)

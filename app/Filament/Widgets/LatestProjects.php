@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use Filament\Tables\Columns\TextColumn;
 use App\Models\Project;
 use Filament\Tables;
 use Filament\Widgets\TableWidget as BaseWidget;
@@ -49,7 +50,7 @@ class LatestProjects extends BaseWidget
     protected function getTableColumns(): array
     {
         return [
-            Tables\Columns\TextColumn::make('name')
+            TextColumn::make('name')
                 ->label(__('Project name'))
                 ->formatStateUsing(fn ($record) => new HtmlString('
                             <div class="w-full flex items-center gap-2">
@@ -59,10 +60,10 @@ class LatestProjects extends BaseWidget
                             </div>
                         ')),
 
-            Tables\Columns\TextColumn::make('owner.name')
+            TextColumn::make('owner.name')
                 ->label(__('Project owner')),
 
-            Tables\Columns\TextColumn::make('status.name')
+            TextColumn::make('status.name')
                 ->label(__('Project status'))
                 ->formatStateUsing(fn ($record) => new HtmlString('
                             <div class="flex items-center gap-2">
