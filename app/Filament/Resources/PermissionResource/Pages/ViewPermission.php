@@ -2,9 +2,8 @@
 
 namespace App\Filament\Resources\PermissionResource\Pages;
 
-use Filament\Actions\EditAction;
 use App\Filament\Resources\PermissionResource;
-use Filament\Pages\Actions;
+use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewPermission extends ViewRecord

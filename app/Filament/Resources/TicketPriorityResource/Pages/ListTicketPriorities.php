@@ -2,9 +2,8 @@
 
 namespace App\Filament\Resources\TicketPriorityResource\Pages;
 
-use Filament\Actions\CreateAction;
 use App\Filament\Resources\TicketPriorityResource;
-use Filament\Pages\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListTicketPriorities extends ListRecords

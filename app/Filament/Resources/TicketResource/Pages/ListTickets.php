@@ -2,9 +2,8 @@
 
 namespace App\Filament\Resources\TicketResource\Pages;
 
-use Filament\Actions\CreateAction;
 use App\Filament\Resources\TicketResource;
-use Filament\Pages\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
 

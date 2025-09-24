@@ -2,9 +2,8 @@
 
 namespace App\Filament\Widgets;
 
-use Filament\Tables\Columns\TextColumn;
 use App\Models\Ticket;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Widgets\TableWidget as BaseWidget;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\HtmlString;

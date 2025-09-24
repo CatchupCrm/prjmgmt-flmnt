@@ -2,10 +2,10 @@
 
 namespace App\Policies;
 
-use Illuminate\Auth\Access\Response;
 use App\Models\Sprint;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class SprintPolicy
 {
@@ -26,7 +26,7 @@ class SprintPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param User $user
+     * @param User   $user
      * @param Sprint $sprint
      *
      * @return Response|bool
@@ -55,7 +55,7 @@ class SprintPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param User $user
+     * @param User   $user
      * @param Sprint $sprint
      *
      * @return Response|bool
@@ -74,7 +74,7 @@ class SprintPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param User $user
+     * @param User   $user
      * @param Sprint $sprint
      *
      * @return Response|bool

@@ -2,12 +2,9 @@
 
 namespace App\Filament\Pages;
 
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Wizard;
-use Filament\Schemas\Components\Wizard\Step;
-use Filament\Schemas\Components\Grid;
 use App\Helpers\JiraHelper;
 use App\Jobs\ImportJiraTicketsJob;
+use BackedEnum;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Placeholder;
@@ -15,6 +12,10 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Wizard;
+use Filament\Schemas\Components\Wizard\Step;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
@@ -38,7 +39,7 @@ class JiraImport extends Page implements HasForms
 
     public $ticketsDataApi;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-cloud-arrow-down';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-cloud-arrow-down';
 
     protected string $view = 'filament.pages.jira-import';
 

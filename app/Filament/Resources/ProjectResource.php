@@ -2,40 +2,37 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Grid;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\RichEditor;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\TagsColumn;
-use Filament\Tables\Columns\BadgeColumn;
-use Filament\Tables\Filters\SelectFilter;
-use Filament\Actions\Action;
-use Filament\Actions\ViewAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\ActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use App\Filament\Resources\ProjectResource\RelationManagers\SprintsRelationManager;
-use App\Filament\Resources\ProjectResource\RelationManagers\UsersRelationManager;
-use App\Filament\Resources\ProjectResource\RelationManagers\StatusesRelationManager;
-use App\Filament\Resources\ProjectResource\Pages\ListProjects;
-use App\Filament\Resources\ProjectResource\Pages\CreateProject;
-use App\Filament\Resources\ProjectResource\Pages\ViewProject;
-use App\Filament\Resources\ProjectResource\Pages\EditProject;
 use App\Exports\ProjectHoursExport;
-use App\Filament\Resources\ProjectResource\Pages;
-use App\Filament\Resources\ProjectResource\RelationManagers;
+use App\Filament\Resources\ProjectResource\Pages\CreateProject;
+use App\Filament\Resources\ProjectResource\Pages\EditProject;
+use App\Filament\Resources\ProjectResource\Pages\ListProjects;
+use App\Filament\Resources\ProjectResource\Pages\ViewProject;
+use App\Filament\Resources\ProjectResource\RelationManagers\SprintsRelationManager;
+use App\Filament\Resources\ProjectResource\RelationManagers\StatusesRelationManager;
+use App\Filament\Resources\ProjectResource\RelationManagers\UsersRelationManager;
 use App\Models\Project;
 use App\Models\ProjectFavorite;
 use App\Models\ProjectStatus;
 use App\Models\User;
+use BackedEnum;
+use Filament\Actions\Action;
+use Filament\Actions\ActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Facades\Filament;
-use Filament\Forms;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\TagsColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
@@ -45,7 +42,7 @@ class ProjectResource extends Resource
 {
     protected static ?string $model = Project::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-archive-box';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-archive-box';
 
     protected static ?int $navigationSort = 1;
 

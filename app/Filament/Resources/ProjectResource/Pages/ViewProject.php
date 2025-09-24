@@ -2,10 +2,9 @@
 
 namespace App\Filament\Resources\ProjectResource\Pages;
 
+use App\Filament\Resources\ProjectResource;
 use Filament\Actions\Action;
 use Filament\Actions\EditAction;
-use App\Filament\Resources\ProjectResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewProject extends ViewRecord

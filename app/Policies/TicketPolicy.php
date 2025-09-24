@@ -2,10 +2,10 @@
 
 namespace App\Policies;
 
-use Illuminate\Auth\Access\Response;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class TicketPolicy
 {
@@ -26,7 +26,7 @@ class TicketPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param User $user
+     * @param User   $user
      * @param Ticket $ticket
      *
      * @return Response|bool
@@ -57,7 +57,7 @@ class TicketPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param User $user
+     * @param User   $user
      * @param Ticket $ticket
      *
      * @return Response|bool
@@ -76,7 +76,7 @@ class TicketPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param User $user
+     * @param User   $user
      * @param Ticket $ticket
      *
      * @return Response|bool

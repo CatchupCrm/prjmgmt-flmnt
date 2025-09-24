@@ -2,10 +2,10 @@
 
 namespace App\Policies;
 
-use Illuminate\Auth\Access\Response;
 use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class PermissionPolicy
 {
@@ -26,7 +26,7 @@ class PermissionPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param User $user
+     * @param User       $user
      * @param Permission $permission
      *
      * @return Response|bool
@@ -51,7 +51,7 @@ class PermissionPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param User $user
+     * @param User       $user
      * @param Permission $permission
      *
      * @return Response|bool
@@ -64,7 +64,7 @@ class PermissionPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param User $user
+     * @param User       $user
      * @param Permission $permission
      *
      * @return Response|bool

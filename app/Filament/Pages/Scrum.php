@@ -2,9 +2,10 @@
 
 namespace App\Filament\Pages;
 
-use Filament\Actions\Action;
 use App\Helpers\KanbanScrumHelper;
 use App\Models\Project;
+use BackedEnum;
+use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -16,7 +17,7 @@ class Scrum extends Page implements HasForms
     use InteractsWithForms;
     use KanbanScrumHelper;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-view-columns';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-view-columns';
 
     protected static ?string $slug = 'scrum/{project}';
 

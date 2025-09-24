@@ -2,21 +2,22 @@
 
 namespace App\Filament\Pages;
 
-use Filament\Actions\Action;
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Grid;
 use App\Models\Role;
 use App\Settings\GeneralSettings;
+use BackedEnum;
+use Filament\Actions\Action;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Pages\SettingsPage;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
 use Illuminate\Contracts\Support\Htmlable;
 
 class ManageGeneralSettings extends SettingsPage
 {
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-cog';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-cog';
 
     protected static string $settings = GeneralSettings::class;
 

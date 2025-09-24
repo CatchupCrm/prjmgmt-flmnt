@@ -2,33 +2,31 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Grid;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\CheckboxList;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\TagsColumn;
-use Filament\Actions\ViewAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteBulkAction;
-use App\Filament\Resources\RoleResource\Pages\ListRoles;
 use App\Filament\Resources\RoleResource\Pages\CreateRole;
-use App\Filament\Resources\RoleResource\Pages\ViewRole;
 use App\Filament\Resources\RoleResource\Pages\EditRole;
-use App\Filament\Resources\RoleResource\Pages;
+use App\Filament\Resources\RoleResource\Pages\ListRoles;
+use App\Filament\Resources\RoleResource\Pages\ViewRole;
 use App\Models\Permission;
 use App\Models\Role;
-use Filament\Forms;
+use BackedEnum;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Forms\Components\CheckboxList;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TagsColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class RoleResource extends Resource
 {
     protected static ?string $model = Role::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-lock-open';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-lock-open';
 
     protected static ?int $navigationSort = 3;
 

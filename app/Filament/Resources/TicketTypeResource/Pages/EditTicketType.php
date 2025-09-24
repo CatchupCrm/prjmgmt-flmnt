@@ -2,11 +2,10 @@
 
 namespace App\Filament\Resources\TicketTypeResource\Pages;
 
-use Filament\Actions\ViewAction;
-use Filament\Actions\DeleteAction;
 use App\Filament\Resources\TicketTypeResource;
 use App\Models\TicketType;
-use Filament\Pages\Actions;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditTicketType extends EditRecord

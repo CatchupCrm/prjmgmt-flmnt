@@ -2,8 +2,8 @@
 
 namespace App\Filament\Widgets;
 
-use Filament\Widgets\StatsOverviewWidget\Stat;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
+use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\HtmlString;
 
 class FavoriteProjects extends BaseWidget

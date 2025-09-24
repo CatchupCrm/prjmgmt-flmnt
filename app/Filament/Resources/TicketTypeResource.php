@@ -2,26 +2,25 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Grid;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\ColorPicker;
+use App\Filament\Resources\TicketTypeResource\Pages\CreateTicketType;
+use App\Filament\Resources\TicketTypeResource\Pages\EditTicketType;
+use App\Filament\Resources\TicketTypeResource\Pages\ListTicketTypes;
+use App\Filament\Resources\TicketTypeResource\Pages\ViewTicketType;
+use App\Models\TicketType;
+use BackedEnum;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\Resource;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Tables;
 use Filament\Tables\Columns\ColorColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Actions\ViewAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteBulkAction;
-use App\Filament\Resources\TicketTypeResource\Pages\ListTicketTypes;
-use App\Filament\Resources\TicketTypeResource\Pages\CreateTicketType;
-use App\Filament\Resources\TicketTypeResource\Pages\ViewTicketType;
-use App\Filament\Resources\TicketTypeResource\Pages\EditTicketType;
-use App\Filament\Resources\TicketTypeResource\Pages;
-use App\Models\TicketType;
-use Filament\Forms;
-use Filament\Resources\Resource;
-use Filament\Tables;
 use Filament\Tables\Table;
 use Guava\FilamentIconPicker\Forms\IconPicker;
 use Guava\FilamentIconPicker\Tables\IconColumn;
@@ -30,7 +29,7 @@ class TicketTypeResource extends Resource
 {
     protected static ?string $model = TicketType::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-clipboard-document-check';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-clipboard-document-check';
 
     protected static ?int $navigationSort = 1;
 

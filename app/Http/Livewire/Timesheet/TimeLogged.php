@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Timesheet;
 
-use Filament\Actions\Contracts\HasActions;
-use Filament\Actions\Concerns\InteractsWithActions;
-use Filament\Tables\Columns\TextColumn;
 use App\Models\Ticket;
-use Filament\Tables;
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Actions\Contracts\HasActions;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;

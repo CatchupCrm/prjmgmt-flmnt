@@ -2,9 +2,8 @@
 
 namespace App\Filament\Resources\ProjectStatusResource\Pages;
 
-use Filament\Actions\EditAction;
 use App\Filament\Resources\ProjectStatusResource;
-use Filament\Pages\Actions;
+use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewProjectStatus extends ViewRecord

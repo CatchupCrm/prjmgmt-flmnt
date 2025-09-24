@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Models\Epic;
 use App\Models\Project;
+use BackedEnum;
 use Carbon\Carbon;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -21,7 +22,7 @@ class RoadMap extends Page implements HasForms
 
     public bool $ticket = false;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-calendar';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-calendar';
 
     protected string $view = 'filament.pages.road-map';
 

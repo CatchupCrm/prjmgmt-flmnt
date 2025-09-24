@@ -1,0 +1,79 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Call to static method make\(\) on an unknown class Guava\\FilamentIconPicker\\Forms\\IconPicker\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Resources/TicketTypeResource.php
+
+		-
+			message: '#^Call to static method make\(\) on an unknown class Guava\\FilamentIconPicker\\Tables\\IconColumn\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Filament/Resources/TicketTypeResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Livewire\\Profile\:\:\$loginColumn\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Http/Livewire/Profile.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Livewire\\Profile\:\:\$updateProfileForm\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Livewire/Profile.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Livewire\\Profile\:\:\$user\.$#'
+			identifier: property.notFound
+			count: 8
+			path: app/Http/Livewire/Profile.php
+
+		-
+			message: '#^App\\Http\\Livewire\\Profile\:\:getUpdateProfileFormSchema\(\) calls parent\:\:getUpdateProfileFormSchema\(\) but App\\Http\\Livewire\\Profile does not extend any class\.$#'
+			identifier: class.noParent
+			count: 1
+			path: app/Http/Livewire/Profile.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Livewire\\Profile\:\:notify\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: app/Http/Livewire/Profile.php
+
+		-
+			message: '#^Method App\\Policies\\ActivityPolicy\:\:forceDelete\(\) should return bool\|Illuminate\\Auth\\Access\\Response but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: app/Policies/ActivityPolicy.php
+
+		-
+			message: '#^Method App\\Policies\\ActivityPolicy\:\:restore\(\) should return bool\|Illuminate\\Auth\\Access\\Response but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: app/Policies/ActivityPolicy.php
+
+		-
+			message: '#^Method App\\Policies\\ProjectStatusPolicy\:\:forceDelete\(\) should return bool\|Illuminate\\Auth\\Access\\Response but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: app/Policies/ProjectStatusPolicy.php
+
+		-
+			message: '#^Method App\\Policies\\ProjectStatusPolicy\:\:restore\(\) should return bool\|Illuminate\\Auth\\Access\\Response but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: app/Policies/ProjectStatusPolicy.php
+
+		-
+			message: '#^Access to constant SCRIPT on an unknown class App\\Providers\\FilamentAsset\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Providers/AppServiceProvider.php
+
+		-
+			message: '#^Call to static method register\(\) on an unknown class App\\Providers\\FilamentAsset\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/Providers/AppServiceProvider.php

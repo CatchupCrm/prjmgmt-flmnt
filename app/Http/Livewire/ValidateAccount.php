@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use Filament\Actions\Contracts\HasActions;
-use Filament\Actions\Concerns\InteractsWithActions;
 use App\Models\User;
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Actions\Contracts\HasActions;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;

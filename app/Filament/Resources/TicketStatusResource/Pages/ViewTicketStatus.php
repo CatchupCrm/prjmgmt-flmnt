@@ -2,9 +2,8 @@
 
 namespace App\Filament\Resources\TicketStatusResource\Pages;
 
-use Filament\Actions\EditAction;
 use App\Filament\Resources\TicketStatusResource;
-use Filament\Pages\Actions;
+use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewTicketStatus extends ViewRecord

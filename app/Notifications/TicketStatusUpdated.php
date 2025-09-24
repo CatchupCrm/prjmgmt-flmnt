@@ -2,10 +2,10 @@
 
 namespace App\Notifications;
 
-use Filament\Actions\Action;
 use App\Models\Ticket;
 use App\Models\TicketActivity;
 use App\Models\User;
+use Filament\Actions\Action;
 use Filament\Notifications\Notification as FilamentNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

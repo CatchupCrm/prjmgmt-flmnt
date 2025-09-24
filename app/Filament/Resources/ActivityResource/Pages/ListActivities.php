@@ -2,9 +2,8 @@
 
 namespace App\Filament\Resources\ActivityResource\Pages;
 
-use Filament\Actions\CreateAction;
 use App\Filament\Resources\ActivityResource;
-use Filament\Pages\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListActivities extends ListRecords

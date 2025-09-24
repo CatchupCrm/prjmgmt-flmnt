@@ -2,10 +2,10 @@
 
 namespace App\Policies;
 
-use Illuminate\Auth\Access\Response;
 use App\Models\ProjectStatus;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class ProjectStatusPolicy
 {
@@ -26,7 +26,7 @@ class ProjectStatusPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param User $user
+     * @param User          $user
      * @param ProjectStatus $projectStatus
      *
      * @return Response|bool
@@ -51,7 +51,7 @@ class ProjectStatusPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param User $user
+     * @param User          $user
      * @param ProjectStatus $projectStatus
      *
      * @return Response|bool
@@ -64,7 +64,7 @@ class ProjectStatusPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param User $user
+     * @param User          $user
      * @param ProjectStatus $projectStatus
      *
      * @return Response|bool
@@ -77,7 +77,7 @@ class ProjectStatusPolicy
     /**
      * Determine whether the user can restore the model.
      *
-     * @param User $user
+     * @param User          $user
      * @param ProjectStatus $projectStatus
      *
      * @return Response|bool
@@ -87,7 +87,7 @@ class ProjectStatusPolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param User $user
+     * @param User          $user
      * @param ProjectStatus $projectStatus
      *
      * @return Response|bool

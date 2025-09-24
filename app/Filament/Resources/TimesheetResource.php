@@ -2,30 +2,28 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Section;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Actions\ViewAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteBulkAction;
-use App\Filament\Resources\TimesheetResource\Pages\ListTimesheet;
 use App\Filament\Resources\TimesheetResource\Pages\EditTimesheet;
-use App\Filament\Resources\TimesheetResource\Pages;
+use App\Filament\Resources\TimesheetResource\Pages\ListTimesheet;
 use App\Models\Activity;
 use App\Models\TicketHour;
-use Filament\Forms;
+use BackedEnum;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class TimesheetResource extends Resource
 {
     protected static ?string $model = TicketHour::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-check-badge';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-check-badge';
 
     protected static ?int $navigationSort = 4;
 

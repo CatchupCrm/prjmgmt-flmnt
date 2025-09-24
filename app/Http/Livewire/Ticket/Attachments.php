@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire\Ticket;
 
-use Filament\Actions\Contracts\HasActions;
-use Filament\Actions\Concerns\InteractsWithActions;
-use Filament\Actions\DeleteAction;
 use App\Models\Ticket;
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Actions\Contracts\HasActions;
+use Filament\Actions\DeleteAction;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Concerns\InteractsWithForms;

@@ -2,20 +2,21 @@
 
 namespace App\Filament\Pages;
 
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Grid;
 use App\Models\Project;
+use BackedEnum;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
 use Illuminate\Contracts\Support\Htmlable;
 
 class Board extends Page implements HasForms
 {
     use InteractsWithForms;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-view-columns';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-view-columns';
 
     protected string $view = 'filament.pages.board';
 

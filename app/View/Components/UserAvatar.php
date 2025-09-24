@@ -2,10 +2,10 @@
 
 namespace App\View\Components;
 
-use Illuminate\Contracts\View\View;
 use App\Models\User;
 use Closure;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class UserAvatar extends Component

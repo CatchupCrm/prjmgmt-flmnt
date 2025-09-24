@@ -3,13 +3,13 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Support\HtmlString;
-use JeffGreco13\FilamentBreezy\Pages\MyProfile as BaseProfile;
+use Jeffgreco13\FilamentBreezy\Livewire\MyProfileComponent as BaseProfile;
 
 class Profile extends BaseProfile
 {
     protected static ?string $slug = 'my-profile';
 
-    public function updateProfile()
+    public function updateProfile(): void
     {
         $data             = $this->updateProfileForm->getState();
         $loginColumnValue = $data[$this->loginColumn];

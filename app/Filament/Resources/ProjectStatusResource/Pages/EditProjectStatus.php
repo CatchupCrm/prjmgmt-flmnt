@@ -2,11 +2,10 @@
 
 namespace App\Filament\Resources\ProjectStatusResource\Pages;
 
-use Filament\Actions\ViewAction;
-use Filament\Actions\DeleteAction;
 use App\Filament\Resources\ProjectStatusResource;
 use App\Models\ProjectStatus;
-use Filament\Pages\Actions;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditProjectStatus extends EditRecord

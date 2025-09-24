@@ -2,11 +2,10 @@
 
 namespace App\Filament\Widgets;
 
-use Filament\Tables\Columns\TextColumn;
-use Filament\Actions\Action;
 use App\Models\TicketComment;
+use Filament\Actions\Action;
 use Filament\Forms\Components\RichEditor;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Widgets\TableWidget as BaseWidget;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\HtmlString;

@@ -2,34 +2,32 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Grid;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\ColorPicker;
+use App\Filament\Resources\TicketStatusResource\Pages\CreateTicketStatus;
+use App\Filament\Resources\TicketStatusResource\Pages\EditTicketStatus;
+use App\Filament\Resources\TicketStatusResource\Pages\ListTicketStatuses;
+use App\Filament\Resources\TicketStatusResource\Pages\ViewTicketStatus;
+use App\Models\TicketStatus;
+use BackedEnum;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Forms\Components\Checkbox;
-use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\Resource;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\ColorColumn;
 use Filament\Tables\Columns\IconColumn;
-use Filament\Actions\ViewAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteBulkAction;
-use App\Filament\Resources\TicketStatusResource\Pages\ListTicketStatuses;
-use App\Filament\Resources\TicketStatusResource\Pages\CreateTicketStatus;
-use App\Filament\Resources\TicketStatusResource\Pages\ViewTicketStatus;
-use App\Filament\Resources\TicketStatusResource\Pages\EditTicketStatus;
-use App\Filament\Resources\TicketStatusResource\Pages;
-use App\Models\TicketStatus;
-use Filament\Forms;
-use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class TicketStatusResource extends Resource
 {
     protected static ?string $model = TicketStatus::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-clipboard';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-clipboard';
 
     protected static ?int $navigationSort = 1;
 

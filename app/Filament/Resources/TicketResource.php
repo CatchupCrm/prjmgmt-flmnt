@@ -2,23 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Grid;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Repeater;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\SelectFilter;
-use Filament\Actions\ViewAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteBulkAction;
-use App\Filament\Resources\TicketResource\Pages\ListTickets;
 use App\Filament\Resources\TicketResource\Pages\CreateTicket;
-use App\Filament\Resources\TicketResource\Pages\ViewTicket;
 use App\Filament\Resources\TicketResource\Pages\EditTicket;
-use App\Filament\Resources\TicketResource\Pages;
+use App\Filament\Resources\TicketResource\Pages\ListTickets;
+use App\Filament\Resources\TicketResource\Pages\ViewTicket;
 use App\Models\Epic;
 use App\Models\Project;
 use App\Models\Ticket;
@@ -27,11 +14,22 @@ use App\Models\TicketRelation;
 use App\Models\TicketStatus;
 use App\Models\TicketType;
 use App\Models\User;
-use Filament\Forms;
+use BackedEnum;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\HtmlString;
 
@@ -39,7 +37,7 @@ class TicketResource extends Resource
 {
     protected static ?string $model = Ticket::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-ticket';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-ticket';
 
     protected static ?int $navigationSort = 2;
 
